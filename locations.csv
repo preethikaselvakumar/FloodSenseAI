@@ -1,0 +1,26 @@
+place,severity,type,latitude,longitude,notes
+Devanampattinam,Very High,coastal,11.52,79.78,Cyclone surge zone
+Kattumannarkoil,Very High,near_river,11.49,79.55,Gadilam River
+Karaikkudi,High,low_lying,11.4,79.07,2015 flood zone
+Parangipettai,Very High,coastal,11.4878,79.7742,Cyclone + tsunami
+Annamalai Nagar,High,urban,11.4975,79.752,University flooding
+Nallathur,High,low_lying,11.47,79.6,Agricultural flood
+Thiruppapuliyur,Very High,critical_area,11.75,79.77,Industrial flooding
+Mangalore,High,near_river,11.45,79.52,Coleroon basin
+Keelkangeyankuppam,High,urban,11.51,79.74,Residential stagnation
+Pudukuppam,Very High,coastal,11.48,79.81,Beach flooding
+Nallavadu,Very High,coastal,11.7505,79.765,Coastal village
+Sivanarpuram,Very High,coastal,11.745,79.76,Coastal village
+Nanamedu,High,coastal,11.74,79.755,Coastal village
+Rajapettai,Very High,coastal,11.735,79.75,Coastal village
+Sonanchavadi,Very High,coastal,11.73,79.745,Coastal village
+Kondur,High,coastal,11.725,79.74,Coastal village
+Puduchattiram,Very High,low_lying,11.6,79.65,Highly vulnerable block
+Melbhunagiri,Very High,low_lying,11.65,79.7,Highly vulnerable block
+Keerapalayam,High,low_lying,11.55,79.62,Vulnerable block
+Kurinjipadi,Very High,urban,11.67,79.68,Highly vulnerable
+Cuddalore Town,Very High,urban,11.76,79.775,District HQ
+Chidambaram,High,urban,11.4,79.715,Urban flood zone
+Panruti,Moderate,urban,11.78,79.82,Urban flood zone
+Virudhachalam,Moderate,urban,11.5,79.4,Secondary flood zone
+Tittagudi,Moderate,urban,11.42,79.3,Secondary flood zone

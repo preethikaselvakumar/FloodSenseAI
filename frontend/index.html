@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FloodSense AI Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>FloodSense AI - Cuddalore Flood Dashboard</h1>
+
+    <div class="summary">
+        <p id="total-locations">Total Locations: --</p>
+        <p id="danger-count">Danger: --</p>
+        <p id="warning-count">Warning: --</p>
+        <p id="safe-count">Safe: --</p>
+    </div>
+
+    <canvas id="riskChart"></canvas>
+
+    <h2>Location Predictions</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Place</th>
+                <th>Severity</th>
+                <th>Type</th>
+                <th>Risk Score</th>
+                <th>Risk Level</th>
+                <th>Reason</th>
+            </tr>
+        </thead>
+        <tbody id="prediction-table-body"></tbody>
+    </table>
+
+    <script src="app.js"></script>
+</body>
+</html>
