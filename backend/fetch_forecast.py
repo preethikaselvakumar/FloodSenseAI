@@ -28,12 +28,20 @@ for location in locations:
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     cursor.execute("""
-        INSERT INTO weather_observations 
-        (location_id, timestamp, rain_forecast_3h, rain_forecast_6h, 
-         rain_forecast_24h, rainfall_trend, weather_main, description)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    """, (location_id, timestamp, next_3h_rain, next_6h_rain, next_24h_rain, 
-          trend, "Forecast", forecast_data["list"][0]["weather"][0]["description"]))
+    INSERT INTO weather_observations 
+    (location_id, timestamp, rain_forecast_3h, rain_forecast_6h, 
+     rain_forecast_24h, rainfall_trend, weather_main, weather_description)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+""", (
+    location_id,
+    timestamp,
+    next_3h_rain,
+    next_6h_rain,
+    next_24h_rain,
+    trend,
+    "Forecast",
+    forecast_data["list"][0]["weather"][0]["description"]
+))
 
     print(f"✅ Forecast saved for {place}: {next_3h_rain:.1f}mm 3h, trend={trend}")
 

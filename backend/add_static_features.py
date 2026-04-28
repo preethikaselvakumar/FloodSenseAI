@@ -7,22 +7,42 @@ DB_PATH = os.path.join(BASE_DIR, "..", "database", "floodsense.db")
 conn = sqlite3.connect(DB_PATH)
 cursor = conn.cursor()
 
-data = [
-    (1, 3.0, "Very High", "Very High", "Yes", "Low coastal zone"),
-    (2, 8.0, "High", "Low", "Yes", "River influenced"),
-    (3, 12.0, "High", "Low", "No", "Low-lying inland"),
-    (4, 2.5, "Very High", "Very High", "Yes", "Coastal flood-prone"),
-    (5, 6.0, "High", "Moderate", "No", "Urban flood-prone")
-]
+# Clear old static features
+cursor.execute("DELETE FROM static_features")
 
-for row in data:
-    cursor.execute("""
-        INSERT INTO static_features
-        (location_id, elevation_m, elevation_risk, coastal_risk, floodplain_tag, notes)
-        VALUES (?, ?, ?, ?, ?, ?)
-    """, row)
+# Get actual location ids from database
+locations = cursor.execute("SELECT id, place FROM locations").fetchall()
+
+for loc_id, place in locations:
+    if place == "Parangipettai":
+        cursor.execute("""
+            INSERT INTO static_features
+            (location_id, elevation_m, elevation_risk, coastal_risk, floodplain_tag, notes)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (
+            loc_id,
+            2.0,
+            "Very High",
+            "Very High",
+            "Yes",
+            "Coastal flood-prone and surge-vulnerable area"
+        ))
+
+    elif place == "Cuddalore Town":
+        cursor.execute("""
+            INSERT INTO static_features
+            (location_id, elevation_m, elevation_risk, coastal_risk, floodplain_tag, notes)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (
+            loc_id,
+            5.0,
+            "Very High",
+            "High",
+            "Yes",
+            "District HQ and urban flood-prone area"
+        ))
 
 conn.commit()
 conn.close()
 
-print("Static features inserted successfully!")
+print("✅ Static features inserted successfully!")

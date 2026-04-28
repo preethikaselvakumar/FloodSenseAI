@@ -2,14 +2,12 @@ import sqlite3
 import os
 from datetime import datetime
 
-# Fix DB path (important)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "..", "database", "floodsense.db")
 
 conn = sqlite3.connect(DB_PATH)
 cursor = conn.cursor()
 
-# Create predictions table
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS predictions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -21,14 +19,15 @@ CREATE TABLE IF NOT EXISTS predictions (
 )
 """)
 
-# Get data from both tables
+# Clear old predictions first
+cursor.execute("DELETE FROM predictions")
+
 rows = cursor.execute("""
 SELECT l.id, l.place, l.severity, l.type, s.elevation_risk
 FROM locations l
 JOIN static_features s ON l.id = s.location_id
 """).fetchall()
 
-# Score mappings
 severity_map = {
     "Very High": 40,
     "High": 25,
@@ -50,7 +49,6 @@ type_map = {
 def get_score(value, mapping):
     return mapping.get(value, 0)
 
-# Loop through each location
 for row in rows:
     location_id, place, severity, loc_type, elevation_risk = row
 
@@ -60,7 +58,6 @@ for row in rows:
         get_score(loc_type, type_map)
     )
 
-    # Risk classification
     if score >= 60:
         level = "Danger"
     elif score >= 30:
@@ -69,7 +66,6 @@ for row in rows:
         level = "Safe"
 
     reason = f"{severity} + {elevation_risk} + {loc_type}"
-
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     cursor.execute("""
@@ -78,11 +74,6 @@ for row in rows:
     """, (location_id, timestamp, score, level, reason))
 
     print(f"{place} → {score} → {level}")
-
-# Clear old data
-cursor.execute("DELETE FROM predictions")
-
-# Then insert new predictions
 
 conn.commit()
 conn.close()

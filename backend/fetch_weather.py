@@ -1,10 +1,12 @@
 import sqlite3
 import requests
 from datetime import datetime
+from dotenv import load_dotenv
 import os
 
-API_KEY = "bc2dd0fda7728e0e614809ace68d7fdb"
+load_dotenv()
 
+API_KEY = os.getenv("API_KEY")
 # Correct DB path
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "..", "database", "floodsense.db")
@@ -20,7 +22,7 @@ locations = cursor.execute(
 for location in locations:
     location_id, place, lat, lon = location
 
-    url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API_KEY}&units=metric"
+    url = f"http://api.openweathermap.org/data/2.5/weather?q=Cuddalore&appid={API_KEY}"
 
     try:
         response = requests.get(url)
